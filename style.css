@@ -106,14 +106,15 @@ ul, ol { list-style: none; }
 .hero-photo {
   position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 0 40px 0;
-  background: linear-gradient(#5d9fe6 0%, #a9cdf3 55%, #7a4635 55%, #5a3225 100%);
+  min-height: 520px;
+  padding: 0;
+  overflow: hidden;
+  background: var(--black);
 }
 
 .corner-note {
   position: absolute;
+  z-index: 2;
   top: 24px;
   right: 32px;
   font-size: 1.7rem;
@@ -122,8 +123,8 @@ ul, ol { list-style: none; }
   color: var(--black);
 }
 
-.photo { position: relative; width: 100%; aspect-ratio: 5 / 2; }
-.hero-photo .photo { box-shadow: 0 16px 30px rgba(0,0,0,.35); }
+.photo { position: relative; width: 100%; min-height: 100%; flex: 1; }
+.hero-photo .photo { box-shadow: none; }
 
 /* handwritten photo notes */
 .note {
@@ -142,8 +143,15 @@ figure .note {
   color: var(--white);
   text-shadow: 0 1px 4px rgba(0,0,0,.8);
 }
-.hero-photo .photo { overflow: visible; }
-.hero-photo .note-light { right: 16px; left: auto; bottom: -46px; text-align: right; color: var(--white); }
+.hero-photo .photo { overflow: hidden; }
+.hero-photo .note-light {
+  right: 16px;
+  left: auto;
+  bottom: 16px;
+  text-align: right;
+  color: var(--white);
+  text-shadow: 0 2px 8px rgba(0,0,0,.9);
+}
 .gallery figcaption { background: rgba(0,0,0,.45); padding: 4px 8px; border-radius: 3px; }
 
 /* ---------- Overview ---------- */
@@ -312,7 +320,7 @@ figure .note {
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
   .hero { grid-template-columns: 1fr; }
-  .hero-photo { padding-bottom: 80px; }
+  .hero-photo { padding: 0; }
   .overview { grid-template-columns: 1fr; }
   .sticker-black { justify-self: start; }
   .gallery { grid-template-columns: repeat(2, 1fr); grid-template-rows: none; }
@@ -397,8 +405,8 @@ body.no-scroll { overflow: hidden; }
 
 /* zoomable images */
 .zoomable { cursor: zoom-in; }
-.hero-photo .photo { transition: transform .4s ease, box-shadow .4s ease; }
-.hero-photo .photo:hover { transform: translateY(-6px); box-shadow: 0 24px 40px rgba(0,0,0,.4); }
+.hero-photo .photo img { transition: transform .7s ease; }
+.hero-photo .photo:hover img { transform: scale(1.08); }
 
 /* overview pillars */
 .pillars li { transition: transform .3s ease, background .3s ease; border-radius: 6px; }
